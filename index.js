@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const getRegister = require('./services/getRegister');
+const getRegister = require('./services/getAllTalkers');
 
 const app = express();
 app.use(bodyParser.json());
