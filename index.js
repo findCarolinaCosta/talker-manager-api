@@ -14,6 +14,7 @@ const {
   editTalker,
   getValidateEmail,
   getValidatePassword,
+  deleteTalker,
 } = require('./services');
 
 const validateChange = [
@@ -45,6 +46,8 @@ app.post('/login', validateLogin, login);
 app.post('/talker', validateChange, createTalker);
 
 app.put('/talker/:id', validateChange, editTalker);
+
+app.delete('/talker/:id', getAuthorization, deleteTalker);
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {

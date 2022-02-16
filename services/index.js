@@ -12,6 +12,7 @@ const {
 } = require('./getValidateInfos');
 const createTalker = require('./createTalker');
 const { getValidateEmail, getValidatePassword } = require('./getValidateLoginInfos');
+const deleteTalker = require('./deleteTalker');
 
 module.exports = { 
   getAllTalkers,
@@ -27,4 +28,5 @@ module.exports = {
   getWatchedAtFormat,
   getValidateEmail,
   getValidatePassword,
+  deleteTalker,
 };
