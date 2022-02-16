@@ -15,6 +15,7 @@ const {
   getValidateEmail,
   getValidatePassword,
   deleteTalker,
+  searchTalker,
 } = require('./services');
 
 const validateChange = [
@@ -38,6 +39,8 @@ const HTTP_OK_STATUS = 200;
 const PORT = '3000';
 
 app.get('/talker', getAllTalkers);
+
+app.get('/talker/search', getAuthorization, searchTalker);
 
 app.get('/talker/:id', getTalkerById);
 
