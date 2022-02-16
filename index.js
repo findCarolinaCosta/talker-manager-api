@@ -12,15 +12,22 @@ const {
   getValidateRate,
   getWatchedAtFormat,
   editTalker,
+  getValidateEmail,
+  getValidatePassword,
 } = require('./services');
 
-const validate = [
+const validateChange = [
   getAuthorization,
   getValidateTalk,
   getValidateName, 
   getValidateAge,
   getValidateRate,
   getWatchedAtFormat,
+];
+
+const validateLogin = [
+  getValidateEmail,
+  getValidatePassword,
 ];
 
 const app = express();
@@ -33,11 +40,11 @@ app.get('/talker', getAllTalkers);
 
 app.get('/talker/:id', getTalkerById);
 
-app.post('/login', login);
+app.post('/login', validateLogin, login);
 
-app.post('/talker', validate, createTalker);
+app.post('/talker', validateChange, createTalker);
 
-app.put('/talker/:id', validate, editTalker);
+app.put('/talker/:id', validateChange, editTalker);
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {

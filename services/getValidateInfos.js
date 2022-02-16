@@ -40,8 +40,6 @@ function getValidateTalk(req, res, next) {
    next();
   } catch (e) {
     console.log(e);
-    e.message = { 
-      message: 'O campo "talk" é obrigatório e "watchedAt" e "rate" não podem ser vazios' };
     next(e);
   }
 }
