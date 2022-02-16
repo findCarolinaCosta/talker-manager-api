@@ -1,6 +1,26 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { getAllTalkers, getTalkerById, login } = require('./services');
+const {
+  getAllTalkers,
+  getTalkerById,
+  login,
+  createTalker,
+  getAuthorization,
+  getValidateName,
+  getValidateAge,
+  getValidateTalk,
+  getValidateRate,
+  getWatchedAtFormat,
+} = require('./services');
+
+const validate = [
+  getAuthorization,
+  getValidateTalk,
+  getValidateName, 
+  getValidateAge,
+  getValidateRate,
+  getWatchedAtFormat,
+];
 
 const app = express();
 app.use(bodyParser.json());
@@ -14,6 +34,8 @@ app.get('/talker/:id', getTalkerById);
 
 app.post('/login', login);
 
+app.post('/talker', validate, createTalker);
+
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
@@ -21,6 +43,9 @@ app.get('/', (_request, response) => {
 
 // Middleware de erro
 app.use((err, _req, res, _next) => {
+  if (err.message.message.includes('O campo "talk"')) {
+  res.status(400).send(err.message);
+  }
   res.status(500).send(err.message);
 });
 
