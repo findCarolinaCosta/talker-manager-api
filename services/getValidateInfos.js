@@ -33,13 +33,13 @@ function getValidateAge(req, res, next) {
 function getValidateTalk(req, res, next) {
   const { talk } = req.body;
   try {
-  if (!talk.watchedAt || !talk.rate || !talk) {
+  if (!talk || Object.keys(talk).length < 2) {
     return res.status(400)
     .json({ message: 'O campo "talk" é obrigatório e "watchedAt" e "rate" não podem ser vazios' });
   }
    next();
   } catch (e) {
-    // console.error(e.status);
+    console.log(e);
     e.message = { 
       message: 'O campo "talk" é obrigatório e "watchedAt" e "rate" não podem ser vazios' };
     next(e);

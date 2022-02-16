@@ -11,6 +11,7 @@ const {
   getValidateTalk,
   getValidateRate,
   getWatchedAtFormat,
+  editTalker,
 } = require('./services');
 
 const validate = [
@@ -35,6 +36,8 @@ app.get('/talker/:id', getTalkerById);
 app.post('/login', login);
 
 app.post('/talker', validate, createTalker);
+
+app.put('/talker/:id', validate, editTalker);
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
