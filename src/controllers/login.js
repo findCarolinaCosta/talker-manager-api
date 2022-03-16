@@ -1,4 +1,4 @@
-const generateToken = require('./helpers/generateToken');
+const generateToken = require('../helpers/generateToken');
 
 module.exports = (_req, res, next) => {
   try {

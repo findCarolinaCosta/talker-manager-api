@@ -1,35 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const {
-  getAllTalkers,
-  getTalkerById,
-  login,
-  createTalker,
-  getAuthorization,
-  getValidateName,
-  getValidateAge,
-  getValidateTalk,
-  getValidateRate,
-  getWatchedAtFormat,
-  editTalker,
-  getValidateEmail,
-  getValidatePassword,
-  deleteTalker,
-  searchTalker,
-} = require('./services');
+const controller = require('./src/controllers');
 
 const validateChange = [
-  getAuthorization,
-  getValidateTalk,
-  getValidateName, 
-  getValidateAge,
-  getValidateRate,
-  getWatchedAtFormat,
+  controller.getAuthorization,
+  controller.getValidateTalk,
+  controller.getValidateName, 
+  controller.getValidateAge,
+  controller.getValidateRate,
+  controller.getWatchedAtFormat,
 ];
 
 const validateLogin = [
-  getValidateEmail,
-  getValidatePassword,
+  controller.getValidateEmail,
+  controller.getValidatePassword,
 ];
 
 const app = express();
@@ -38,19 +22,19 @@ app.use(bodyParser.json());
 const HTTP_OK_STATUS = 200;
 const PORT = '3000';
 
-app.get('/talker', getAllTalkers);
+app.get('/talker', controller.getAllTalkers);
 
-app.get('/talker/search', getAuthorization, searchTalker);
+app.get('/talker/search', controller.getAuthorization, controller.searchTalker);
 
-app.get('/talker/:id', getTalkerById);
+app.get('/talker/:id', controller.getTalkerById);
 
-app.post('/login', validateLogin, login);
+app.post('/login', validateLogin, controller.login);
 
-app.post('/talker', validateChange, createTalker);
+app.post('/talker', validateChange, controller.createTalker);
 
-app.put('/talker/:id', validateChange, editTalker);
+app.put('/talker/:id', validateChange, controller.editTalker);
 
-app.delete('/talker/:id', getAuthorization, deleteTalker);
+app.delete('/talker/:id', controller.getAuthorization, controller.deleteTalker);
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {

@@ -1,4 +1,4 @@
-const { readFile } = require('./fileManipulation');
+const { readFile } = require('../helpers/fileManipulation');
 
 module.exports = async (req, res, next) => {
   try {
